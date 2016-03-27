@@ -45,7 +45,7 @@ let seq_record_ ic yield =
        | None -> ()
        | Some r -> yield r)
 
-let iter_file file f = with_in file (fun ic -> f (seq_record_ ic))
+let iter_file file yield = with_in file (fun ic -> seq_record_ ic yield)
 
 let rec seq_files_ dir yield =
   let d = Unix.opendir dir in
@@ -54,10 +54,12 @@ let rec seq_files_ dir yield =
     (fun d ->
        let rec aux () = match Unix.readdir d with
          | s ->
+           let abs_s = Filename.concat dir s in
            begin
-             if Sys.is_directory s
-             then seq_files_ s yield
-             else yield s
+             if s = "." || s = ".."  then ()
+             else if Sys.is_directory abs_s
+             then seq_files_ abs_s yield
+             else yield abs_s
            end;
            aux ()
          | exception End_of_file -> ()
@@ -65,13 +67,10 @@ let rec seq_files_ dir yield =
        aux ())
     d
 
-let iter_dir dir f =
-  let seq yield =
-    seq_files_ dir
-      (fun file ->
-         with_in file
-           (fun ic -> seq_record_ ic (fun x -> yield (file,x))))
-  in
-  f seq
+let iter_dir dir yield =
+  seq_files_ dir
+    (fun file ->
+       with_in file
+         (fun ic -> seq_record_ ic (fun x -> yield (file,x))))
 
 

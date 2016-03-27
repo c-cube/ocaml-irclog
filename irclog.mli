@@ -14,6 +14,6 @@ val re : Re.re
 
 val parse_record : string -> log_record option
 
-val iter_file : string -> (log_record sequence -> 'a) -> 'a
+val iter_file : string -> log_record sequence
 
-val iter_dir : string -> ((string * log_record) sequence -> 'a) -> 'a
+val iter_dir : string -> (string * log_record) sequence
