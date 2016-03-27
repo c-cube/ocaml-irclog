@@ -1,4 +1,7 @@
 S .
 B _build
-PKG re
+PKG containers
+PKG unix
+PKG sequence
+PKG re.posix
 FLG -w +a-4-44-50

@@ -7,7 +7,7 @@ lib:
 	ocamlbuild -use-ocamlfind $(TARGETS)
 
 TOOLS=tools/stats.native
-TOOLS_DEPS=-package containers -package unix -package re.posix
+TOOLS_DEPS=-package containers -package unix -package re.posix -package sequence
 
 tools: lib
 	ocamlbuild -use-ocamlfind -I . $(TOOLS_DEPS) $(TOOLS)

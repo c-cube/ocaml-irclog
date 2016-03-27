@@ -18,5 +18,9 @@ depends: [
     "base-unix"
     "ocamlbuild" {build}
 ]
+depopts: [
+    "containers"
+    "sequence"
+]
 tags: [ "irc" "log" ]
 homepage: "https://cedeela.fr/~simon/"
