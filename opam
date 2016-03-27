@@ -4,7 +4,7 @@ version: "dev"
 author: "Simon Cruanes"
 maintainer: "simon.cruanes@inria.fr"
 build: [
-    [make "build"]
+    [make "all"]
 ]
 install: [
     [make "install"]
