@@ -10,7 +10,7 @@ let analyse_spoken_char tbl r =
   let count =
     CCString.to_seq r.Irclog.msg
     |> Sequence.filter
-      (function 'a'..'z' | 'A'..'Z' -> true | _ -> false)
+      (function ' ' | '\t' -> false | _ -> true)
     |> Sequence.length
   in
   hashtbl_add tbl r.Irclog.author count
