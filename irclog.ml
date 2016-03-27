@@ -9,7 +9,7 @@ type log_record = {
   msg: string;
 }
 
-let re = Re_posix.re "([0-9:]*)<(%s)> (%s)" |> Re.compile
+let re = Re_posix.re "([0-9:]*)<([^>]*)> (.*)" |> Re.compile
 
 let finally_ f x ~h =
   try
