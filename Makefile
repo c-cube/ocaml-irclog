@@ -1,13 +1,16 @@
 TARGETS=irclog.cma irclog.cmxa irclog.cmxs irclog.a
 INSTALL=$(addprefix _build/, $(TARGETS)) _build/irclog.cmi META
 
-all:
+all: lib tools
+
+lib:
 	ocamlbuild -use-ocamlfind $(TARGETS)
 
 TOOLS=tools/stats.native
+TOOLS_DEPS=-package containers -package unix -package re.posix
 
-tools: all
-	ocamlbuild -use-ocamlfind -package containers -package irclog -package unix $(TOOLS)
+tools: lib
+	ocamlbuild -use-ocamlfind -I . $(TOOLS_DEPS) $(TOOLS)
 
 clean:
 	ocamlbuild -clean
