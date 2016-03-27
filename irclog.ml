@@ -37,9 +37,9 @@ let parse_record s =
   match Re.exec_opt re s  with
     | None -> None
     | Some g ->
-      let time = Re.Group.get g 0 in
-      let author = Re.Group.get g 1 in
-      let msg = Re.Group.get g 2 in
+      let time = Re.Group.get g 1 |> String.trim in
+      let author = Re.Group.get g 2 |> String.trim in
+      let msg = Re.Group.get g 3 in
       Some {author; time; msg}
 
 let seq_record_ ic yield =
