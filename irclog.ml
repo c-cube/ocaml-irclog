@@ -33,12 +33,17 @@ let rec seq_lines_ ic yield =
     | s -> yield s; seq_lines_ ic yield
     | exception End_of_file -> ()
 
+let norm_author s =
+  match s.[0] with
+    | '+' | '@' -> String.sub s 1 (String.length s-1)
+    | _ -> s
+
 let parse_record s =
   match Re.exec_opt re s  with
     | None -> None
     | Some g ->
       let time = Re.Group.get g 1 |> String.trim in
-      let author = Re.Group.get g 2 |> String.trim in
+      let author = Re.Group.get g 2 |> String.trim |> norm_author in
       let msg = Re.Group.get g 3 in
       Some {author; time; msg}
 
