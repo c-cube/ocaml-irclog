@@ -27,7 +27,7 @@ let with_in ?(mode=0o644) ?(flags=[Open_text]) filename f =
 (* read lines *)
 let rec seq_lines_ ic yield =
   match input_line ic with
-    | s -> yield s
+    | s -> yield s; seq_lines_ ic yield
     | exception End_of_file -> ()
 
 let parse_record s =
