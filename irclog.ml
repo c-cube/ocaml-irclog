@@ -9,6 +9,9 @@ type log_record = {
   msg: string;
 }
 
+let string_of_record r =
+  Printf.sprintf "{author=%s, time=%s, msg=%s}" r.author r.time r.msg
+
 let re = Re_posix.re "([0-9:]*)<([^>]*)> (.*)" |> Re.compile
 
 let finally_ f x ~h =
@@ -34,8 +37,8 @@ let parse_record s =
   match Re.exec_opt re s  with
     | None -> None
     | Some g ->
-      let author = Re.Group.get g 1 in
       let time = Re.Group.get g 0 in
+      let author = Re.Group.get g 1 in
       let msg = Re.Group.get g 2 in
       Some {author; time; msg}
 
