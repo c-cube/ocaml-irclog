@@ -1,0 +1,9 @@
+version = "dev"
+description = "IRC Log parser"
+requires = "re"
+archive(byte) = "irclog.cma"
+archive(byte, plugin) = "irclog.cma"
+archive(native) = "irclog.cmxa"
+archive(native, plugin) = "irclog.cmxs"
+exists_if = "irclog.cma"
+
