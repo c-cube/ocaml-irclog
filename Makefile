@@ -1,4 +1,4 @@
-TARGETS=irclog.cma irclog.cmxa irclog.cmxs
+TARGETS=irclog.cma irclog.cmxa irclog.cmxs irclog.a
 INSTALL=$(addprefix _build/, $(TARGETS)) _build/irclog.cmi META
 
 all:
