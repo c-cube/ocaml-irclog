@@ -1,1 +1,1 @@
-<**/*.ml*>: package(re)
+<**/*.ml*>: package(re), package(unix)

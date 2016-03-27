@@ -15,6 +15,7 @@ remove: [
 depends: [
     "ocamlfind" {build}
     "re"
+    "base-unix"
     "ocamlbuild" {build}
 ]
 tags: [ "irc" "log" ]
