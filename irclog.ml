@@ -53,9 +53,9 @@ let seq_record_ ic yield =
        | None -> ()
        | Some r -> yield r)
 
-let iter_file file yield = with_in file (fun ic -> seq_record_ ic yield)
+let iter_records ~file yield = with_in file (fun ic -> seq_record_ ic yield)
 
-let rec seq_files_ dir yield =
+let rec iter_files ~dir yield =
   let d = Unix.opendir dir in
   finally_
     ~h:(fun d -> Unix.closedir d)
@@ -66,7 +66,7 @@ let rec seq_files_ dir yield =
            begin
              if s = "." || s = ".."  then ()
              else if Sys.is_directory abs_s
-             then seq_files_ abs_s yield
+             then iter_files ~dir:abs_s yield
              else yield abs_s
            end;
            aux ()
@@ -75,8 +75,8 @@ let rec seq_files_ dir yield =
        aux ())
     d
 
-let iter_dir dir yield =
-  seq_files_ dir
+let iter_records_dir ~dir yield =
+  iter_files ~dir
     (fun file ->
        with_in file
          (fun ic -> seq_record_ ic (fun x -> yield (file,x))))

@@ -16,6 +16,12 @@ val parse_record : string -> log_record option
 
 val string_of_record : log_record -> string
 
-val iter_file : string -> log_record sequence
+val iter_records : file:string -> log_record sequence
 
-val iter_dir : string -> (string * log_record) sequence
+val iter_files : dir:string -> string sequence
+(** [iter_files d] iterates on the files (not directories) that can
+    be found under [d] *)
+
+val iter_records_dir : dir:string -> (string * log_record) sequence
+(** [iter_files dir] calls {!iter_records} on every file under [dir],
+    recursively, yielding a sequence of [(file, record)] *)

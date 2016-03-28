@@ -18,8 +18,8 @@ let analyse_spoken_char tbl r =
 let analyse_dirs dirs ~f =
   let tbl = Hashtbl.create 64 in
   List.iter
-    (fun d ->
-       Irclog.iter_dir d (fun (_,r) -> f tbl r))
+    (fun dir ->
+       Irclog.iter_records_dir ~dir (fun (_,r) -> f tbl r))
     dirs;
   CCHashtbl.to_list tbl
     |> List.filter (fun (_,i) -> i > 10)
