@@ -12,6 +12,9 @@ type log_record = {
 
 val re : Re.re
 
+val norm_author : string -> string
+(** Normalize the nicknames a bit *)
+
 val parse_record : string -> log_record option
 
 val string_of_record : log_record -> string
