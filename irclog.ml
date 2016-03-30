@@ -34,9 +34,11 @@ let rec seq_lines_ ic yield =
     | exception End_of_file -> ()
 
 let norm_author s =
-  match s.[0] with
+  let s' = match s.[0] with
     | '+' | '@' -> String.sub s 1 (String.length s-1)
     | _ -> s
+  in
+  String.lowercase s'
 
 let parse_record s =
   match Re.exec_opt re s  with
